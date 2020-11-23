@@ -15,4 +15,4 @@ with 15-441/641 Project 3.
   - `proxy.c`: Contains the major network and multiplexing related code
   - `httpparser.c`: Contains some http parsing and header value extraction code
   - `customsocket.c` Contains some helper functions for creating sockets
-  - `grapher.py`: Generate plots for CP1 writeup; usage: python grapher.py <netsim log> <proxy1 log> <proxy2 log>
+  - `grapher.py`: Generate plots for CP1 writeup. Usage: python grapher.py \<netsim log\> \<proxy1 log\> \<proxy2 log\>
