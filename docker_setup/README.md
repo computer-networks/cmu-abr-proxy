@@ -54,7 +54,7 @@ This is the files to build a Docker image that have all the dependencies you nee
   * Another way to share file with container is by using `bind mounts` or `volume`, which are like a shared folder between your machine and container. You could specify a mapping by the time you start your container using `docker run`. For example,
   `docker run -it -p 7778:7778 -p 7779:7779 -v /tmp:/home 15441-project3:latest /bin/bash` will replace the contents of the container’s `/home/` directory with the `/tmp/` directory on your machine. Note that you shouldn't replace the directory which contains the file we provided. You could find more info about this at [Docker Document](https://docs.docker.com/storage/bind-mounts/).
   ### 6. Load Generator
-  * For checkpoint 2 and 3, we create a simple load generator inside `/autograder/netsim/` called `loadgen.py` to simulate the load in the real life. The load generator will send HTTP request to fetch video chunk from a target port and its access pattern is defined in a load event file.
+  * For checkpoint 2, we create a simple load generator inside `/autograder/netsim/` called `loadgen.py` to simulate the load in the real life. The load generator will send HTTP request to fetch video chunk from a target port and its access pattern is defined in a load event file.
   * You could use command below to run the load generator:
     ```
     ./loadgen.py -e {load event file}
