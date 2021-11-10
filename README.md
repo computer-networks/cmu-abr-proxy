@@ -1,37 +1,37 @@
 # Adaptive Bitrate Proxy
 
 ## Introduction
-The `docker_setup` directory contains the files to build a Docker image in which you will build this project. You will use port mapping to watch video using your web browser outside of the container. It is recommended to read the [Docker documentation](https://docs.docker.com/) to have a basic understanding of what is Docker doing and how to use it. 
+The `docker_setup` directory contains the files to build a Docker image for this project. You will use port mapping to watch video using your web browser outside of the container. It is recommended to read the [Docker documentation](https://docs.docker.com/) to have a basic understanding of what is Docker doing and how to use it. 
 
 
 ## Installation
 1. Install Docker.
 2. Navigate inside the `docker_setup` directory.
-3. Run `docker build -t 15441-project3:latest -f ./DockerFile .`, it may takes a few mintues to build the image. You can use `docker images` to check images you have already built.
+3. Run `docker build -t 15441-project3:latest -f ./DockerFile .`. It may takes a few mintues to build the image. You can use `docker images` to check images you have already built.
 4. Now that you have the image, you can run 
-`docker run -it -p 7778:7778 -p 7779:7779 15441-project3:latest /bin/bash` to launch a container inside your machines with port mapping configured for ports 7778 and 7779. With port mapping, you can access port 7778 and 7779 of your container from your machine's web browser. You can find more info in the [Docker networking documentation](https://docs.docker.com/config/containers/container-networking/).
+`docker run -it -p 7778:7778 -p 7779:7779 15441-project3:latest /bin/bash` to launch a container inside your machines with port mapping configured for ports 7778 and 7779. With port mapping, you can access ports 7778 and 7779 of your container from your machine's web browser. These port numers are just an example. You may need to map other ports instead. You can find more info in the [Docker networking documentation](https://docs.docker.com/config/containers/container-networking/).
 
 
 ## Docker Usage
 * You can use the command `docker ps` to check all the running containers (ID and status).
 * You can use Ctrl-D to exit a container. Note that exiting a container will stop it but **not** remove it. You can still find it using the command `docker ps -a`. If you want to enter that container again, use the commands `docker start <CONTAINER_ID>` and `docker attach <CONTAINER_ID>`.
 * The files inside a container will be preserved if you exit the container. ***Warning: If you remove your container with `docker rm <CONTAINER_ID>`, then all of your files will be deleted.***
-* You could find more info about Docker [here](https://docs.docker.com/get-started/) and [here](https://docs.docker.com/engine/reference/commandline/container/)
+* You can find more info about Docker [here](https://docs.docker.com/get-started/) and [here](https://docs.docker.com/engine/reference/commandline/container/).
 
 
 ## Netsim
-* Netsim is the tool we use to provide a simulated network environment inside the container. The environment contains apache servers with video content and the bandwidth-limited link in front of the servers.
+* Netsim is the tool we use to provide a simulated network environment inside the container. The environment contains Apache servers with video content and the bandwidth-limited link in front of the servers.
 * We provide three topologies: **onelink**, **twolink** and **sharelink**.
 * You can start, stop, or restart the network using the terminal:
 ```
 ./netsim.py {onelink,twolink,sharelink} {start,stop,restart}
 ```
 For example, `./netsim.py sharelink start` would start a new sharelink topology inside the container.
-* You can use the `run` command in netsim to change the bandwidth of links according to a event file:
+* You can use the `run` command in netsim to change the bandwidth of links according to an event file:
 ```
 ./netsim.py {onelink,twolink,sharelink} {run} -e EVENTS_FILE
 ```
-We provide two sample event files, but feel free to create your own events files to test your implementation. We recommend you to do so.
+We provide two sample event files, but feel free to create your own event files to test your implementation.
 
 
 ## Multiple terminals
@@ -59,7 +59,7 @@ Refer [here](https://docs.docker.com/engine/reference/commandline/cp/) for more 
 
 ## Starter Proxy Code
 
-The `starter_proxy` directory contains some code to help you get started with 15-441/641 Project 3. See the project handout for a detailed description of the proxy command line arguments. 
+The `starter_proxy` directory contains some code to help you get started with 15-441/641 Project 3. See the project handout for a detailed description of the proxy's command line arguments. 
 
 
 ### File Description
