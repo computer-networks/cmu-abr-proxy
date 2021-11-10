@@ -65,7 +65,7 @@ The `starter_proxy` directory contains some code to help you get started with 15
 ### File Description
 
 - `proxy.c`: Contains the major network and multiplexing related code
-- `httpparser.c`: Contains some http parsing and header value extraction code
+- `httpparser.c`: Contains some HTTP parsing and header value extraction code
 - `customsocket.c` Contains some helper functions for creating sockets
 - `grapher.py`: Generate plots for CP1 writeup. Usage: python grapher.py \<netsim log\> \<proxy1 log\> \<proxy2 log\>
 
