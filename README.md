@@ -70,3 +70,22 @@ docker exec [OPTIONS] CONTAINER COMMAND [ARG...]
   You could refer to [Docker Document](https://docs.docker.com/engine/reference/commandline/cp/) for more info.
 - Another way to share file with container is by using `bind mounts` or `volume`, which are like a shared folder between your machine and container. You could specify a mapping by the time you start your container using `docker run`. For example,
   `docker run -it -p 7778:7778 -p 7779:7779 -v /tmp:/home 15441-project3:latest /bin/bash` will replace the contents of the container’s `/home/` directory with the `/tmp/` directory on your machine. Note that you shouldn't replace the directory which contains the file we provided. You could find more info about this at [Docker Document](https://docs.docker.com/storage/bind-mounts/).
+
+# Starter Proxy Code
+
+This directory contains some code to help you get started
+with 15-441/641 Project 3.
+
+## How To Run
+
+1. Run `echo_server.py`. By default it listens on (127.0.0.1, 10000) - please note that this requires python 3 or above
+2. Run `make` in the root directory
+3. Run `./proxy` by default it listens on (127.0.0.1, 8888)
+4. Run `telnet localhost 8888` to test with telnet
+
+## File Description
+
+- `proxy.c`: Contains the major network and multiplexing related code
+- `httpparser.c`: Contains some http parsing and header value extraction code
+- `customsocket.c` Contains some helper functions for creating sockets
+- `grapher.py`: Generate plots for CP1 writeup. Usage: python grapher.py \<netsim log\> \<proxy1 log\> \<proxy2 log\>
