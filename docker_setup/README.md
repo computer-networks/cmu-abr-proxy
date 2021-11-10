@@ -5,7 +5,7 @@ This is the files to build a Docker image that have all the dependencies you nee
 ## Installation Step
   1. Install Docker, if you get this image from DockerHub, go to step 4.
   2. Enter this directory inside a command line terminal.
-  3. Run `docker build -t 15441-project3:latest -f ./DockerFile .`, it may takes a few mintues to build the image. You could use `docker images` to check images you have in your docker.
+  3. Run `docker build -t 15441-project3:latest -f ./Dockerfile .`, it may takes a few mintues to build the image. You could use `docker images` to check images you have in your docker.
   4. Now you have the image, you could run 
   `docker run -it -p 7778:7778 -p 7779:7779 15441-project3:latest /bin/bash` to run a container inside your machines with port mapping at port number 7778 and 7779. With port mapping, you could access port 7778 and 7779 of your container from your machine's web browser outside. You could find more info at [Docker Document](https://docs.docker.com/config/containers/container-networking/) in port mapping.
   
