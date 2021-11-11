@@ -1,4 +1,4 @@
-# Project 3 Checkpoint 1: Adaptive Bitrate Proxy
+# Project 3, Checkpoint 1: Adaptive Bitrate Proxy
 
 ## Introduction
 The `docker_setup` directory contains the files to build a Docker image for this project. You will use port mapping to watch video using your web browser outside of the container. It is recommended to read the [Docker documentation](https://docs.docker.com/) to have a basic understanding of what is Docker doing and how to use it. 
