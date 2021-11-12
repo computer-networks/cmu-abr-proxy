@@ -19,15 +19,8 @@ ADD ./apache2/ /usr/local/apache2/
 # install click package
 ADD ./click/ /home/click/
 RUN apt-get update &&\
-    apt-get -y install net-tools &&\
-    apt-get install psmisc &&\
-    apt-get -y install gdb &&\
-    apt-get -y install tcpdump &&\
-    apt-get -y install build-essential &&\
-    apt-get -y install python python-pip &&\
-    apt-get -y install bison flex && \
+    apt-get -y install net-tools psmisc gdb tcpdump build-essential python python-pip bison flex &&\
     cd /home/click &&\
     ./configure --enable-local &&\
-    make elemlist &&\
-    make install
-
+    make -j`nproc` elemlist &&\
+    make -j`nproc` install
