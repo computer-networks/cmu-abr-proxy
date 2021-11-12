@@ -22,5 +22,5 @@ RUN apt-get update &&\
     apt-get -y install net-tools psmisc gdb tcpdump build-essential python python-pip bison flex &&\
     cd /home/click &&\
     ./configure --enable-local &&\
-    make -j`nproc` elemlist &&\
-    make -j`nproc` install
+    make -j elemlist &&\
+    make -j install
