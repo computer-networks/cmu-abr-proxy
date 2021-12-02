@@ -97,7 +97,7 @@ if __name__ == "__main__":
             argv = line.split(' ')
             events.append(Thread(target=execute_event,
                           args=(i, float(argv[0]), int(argv[1]),
-				                int(argv[2]), int(argv[3]), port)))
+				                int(argv[2]), int(argv[3]), args.port)))
     events_file.closed
 
     for event in events:
