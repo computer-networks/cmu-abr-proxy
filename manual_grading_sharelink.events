@@ -1,0 +1,55 @@
+# This file contains a list of link change events to execute in the simulated
+# network. Columns are as follows:
+#
+# <time> <link> <bandwidth>
+#
+# time: time (in seconds) after the previous event that this event should run
+# 		Floats are ok. The character '*' indicates the event should wait to
+#		run until the user presses enter.
+#
+# link: The link to modify. This must be one of the bottleneck links specified
+#       in netsim topology. It must be a string of the format
+#       "link_<num>", which should be identical to the link name in netsim topology.
+#
+# bandwidth: The BW to set. Should be in kbit/s unit
+#
+
+# If you want to make other event scripts for testing purposes, make them in separate files
+# and use the -e flag on netsim.py (run netsim.py -h for more info).
+
+0  link_1 2000
+20 link_1 900
+20 link_1 2000
+20 link_1 900
+20 link_1 2000
+20 link_1 300
+20 link_1 2000
+20 link_1 300
+20 link_1 2000
+
+# Rubric:
+#
+# Format 5%:
+#   - Code compiles, TAs do not need to search for or edit any files (5)
+#     - [5] code works with only minor tweaks (command line, docker, etc.)
+#     - [3] code requires changes to the proxy
+#     - [0] code does not work
+#
+# Basic proxy:
+#   - Receives requests from browser and forwards them to server (15)
+#   - Forwards the chunks it receives to the browser (15)
+#   - ^^^ combine these into one category for basic proxying ability:
+#     - [25] proxy can play video and is stable
+#     - [15] proxy cannot play video and we need to use loadgen
+#     - [0] proxy does not work
+#
+# Bitrate adaptation:
+#   - Correct throughput estimation (20)
+#     - Estimates 2000: [2] within 100, [4] within 50, [7] within 10
+#     - Estimates 900: [2] within 100, [4] within 50, [7] within 10
+#     - Estimates 300: [2] within 100, [4] within 50, [6] within 10
+#
+#   - Correct bitrate selection (20)
+#     - 2000 -> 1000: [4] sometimes, [7] always
+#     - 900 -> 500: [4] sometimes, [7] always
+#     - 300 -> 100: [4] sometimes, [6] always
