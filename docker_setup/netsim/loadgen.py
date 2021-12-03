@@ -99,6 +99,10 @@ if __name__ == "__main__":
                           args=(i, float(argv[0]), int(argv[1]),
 				                int(argv[2]), int(argv[3]), args.port)))
     events_file.closed
+    
+    sess = requests.Session()
+    content = sess.get(MANIFEST_TEMPLATE % (IP, args.port))
+    logging.getLogger(__name__).info('Fetched manifest of length %d' % len(content.content))
 
     for event in events:
         event.start()
