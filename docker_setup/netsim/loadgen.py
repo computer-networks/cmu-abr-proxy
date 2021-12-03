@@ -7,7 +7,6 @@ import argparse
 from threading import Thread
 
 IP='127.0.0.1'
-PORT='15641'
 MANIFEST_TEMPLATE = 'http://%s:%s/vod/big_buck_bunny.f4m'
 URL_TEMPLATE = 'http://%s:%s/vod/%sSeg%s-Frag%s'
 
@@ -24,14 +23,14 @@ def strip_comments(f):
 def get_millliseconds():
     return int(round(time.time() * 1000))
 
-def simple_fetcher(id, bitrate, seg_id, frag_id, outcome_list):
+def simple_fetcher(id, bitrate, seg_id, frag_id, outcome_list, port):
     sess = requests.Session()
     count = 0
     chunk_time_list = []
 
     while count < 1:
         start_t = get_millliseconds()
-        content = sess.get(URL_TEMPLATE % (IP, PORT, bitrate, seg_id, frag_id))
+        content = sess.get(URL_TEMPLATE % (IP, port, bitrate, seg_id, frag_id))
         end_t = get_millliseconds()
         logging.getLogger(__name__).debug('Fetched chunk %d in %f sec.\n' %
                                           (count, (end_t - start_t) / 1000))
@@ -48,7 +47,7 @@ def simple_fetcher(id, bitrate, seg_id, frag_id, outcome_list):
                                       sum_time / (count * 1000)))
     outcome_list.append((id, sum_time / (count * 1000)))
 
-def execute_event(id, wait_time, bitrate, seg_id, frag_id):
+def execute_event(id, wait_time, bitrate, seg_id, frag_id, port):
     time.sleep(wait_time)
     thread_set = []
     outcome_list = []
@@ -58,7 +57,7 @@ def execute_event(id, wait_time, bitrate, seg_id, frag_id):
             logfile.write('Command id %d start\n' % id)
         logfile.closed
 
-    simple_fetcher(i, bitrate, seg_id, frag_id, outcome_list)
+    simple_fetcher(i, bitrate, seg_id, frag_id, outcome_list, port)
 
     if args.log:
         with open(args.log, 'a') as logfile:
@@ -71,12 +70,13 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Generate a load to the target'
                                      ' port according to events file')
     parser.add_argument('-e', '--events', required=True, help='events files.')
+    parser.add_argument('-p', '--port', required=True, help='the port to connect to')
     parser.add_argument('-v', '--verbose', action='store_true', default=False,
                         help='Print debug message.')
     parser.add_argument('-l', '--log', default=None, help='Log filename, logs '
                         'would be printed to this file if a filename is given.')
     args = parser.parse_args()
-	
+
     # set up logging
     if args.verbose:
         level = logging.DEBUG
@@ -96,9 +96,13 @@ if __name__ == "__main__":
         for i, line in enumerate(strip_comments(events_file)):
             argv = line.split(' ')
             events.append(Thread(target=execute_event,
-                          args=(i, float(argv[0]), int(argv[1]), 
-				int(argv[2]), int(argv[3]))))
+                          args=(i, float(argv[0]), int(argv[1]),
+				                int(argv[2]), int(argv[3]), args.port)))
     events_file.closed
+
+    sess = requests.Session()
+    content = sess.get(MANIFEST_TEMPLATE % (IP, args.port))
+    logging.getLogger(__name__).info('Fetched manifest of length %d' % len(content.content))
 
     for event in events:
         event.start()
