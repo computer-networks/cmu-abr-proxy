@@ -7,7 +7,7 @@ The `docker_setup` directory contains the files to build a Docker image for this
 ## Installation
 1. Install Docker.
 2. Navigate inside the `docker_setup` directory.
-3. Run `docker build -t 15441-project3:latest -f ./DockerFile .`. It may takes a few mintues to build the image. You can use `docker images` to check images you have already built.
+3. Run `docker build -t 15441-project3:latest -f ./Dockerfile .`. It may takes a few mintues to build the image. You can use `docker images` to check images you have already built.
 4. Now that you have the image, you can run 
 `docker run -it -p 7778:7778 -p 7779:7779 15441-project3:latest /bin/bash` to launch a container inside your machines with port mapping configured for ports 7778 and 7779. With port mapping, you can access ports 7778 and 7779 of your container from your machine's web browser. These port numers are just an example. You may need to map other ports instead. You can find more info in the [Docker networking documentation](https://docs.docker.com/config/containers/container-networking/).
 
